@@ -1,0 +1,13 @@
+.list-suggestion{
+    width: 80%;
+    margin: auto;
+    li{
+        border: 1px solid #000000;
+        border-top: none;
+        padding: 10px;
+        cursor: pointer;
+        &:first-child{
+            border-top: 1px solid #000000;
+        }
+    }
+}
