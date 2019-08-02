@@ -1,9 +1,12 @@
 import React from 'react';
 import Layout from '../containers/Layout';
+import { BrowserRouter } from 'react-router-dom';
 
 function App() {
   return (
-    <Layout />
+    <BrowserRouter>
+      <Layout />
+    </BrowserRouter>
   );
 }
 

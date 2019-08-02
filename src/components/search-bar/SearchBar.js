@@ -22,9 +22,13 @@ class SearchBar extends Component {
     async getArtists(value){
         const url = `https://api.spotify.com/v1/search?q=${value}&type=artist&limit=5`;
         const token = '';
-        const response = await fetch(url, { headers: { 'Authorization': `Bearer ${token}` }});
-        const data = await response.json();
-        this.setState({ artists: data.artists.items });
+        try{
+            const response = await fetch(url, { headers: { 'Authorization': `Bearer ${token}` }});
+            const data = await response.json();
+            this.setState({ artists: data.artists.items });
+        }catch(error) {
+            console.log(error)
+        }
     }
 
     render(){

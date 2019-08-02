@@ -1,5 +1,6 @@
 import React from 'react';
 import './popup.scss';
+import { Link } from 'react-router-dom';
 
 const Popup = (props) => {
 
@@ -8,7 +9,7 @@ const Popup = (props) => {
     if(props.show){
         popupContent = (
             <ul className="list-suggestion">
-                { props.items.map((item) => <li key={item.id}>{item.name}</li>) }
+                { props.items.map((item) => <li key={item.id}><Link to={`artist/${item.id}`}>{item.name}</Link></li>) }
             </ul>
         );
     }
