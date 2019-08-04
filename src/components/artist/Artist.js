@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Albums from './albums/Albums';
 import './Artist.scss';
 
 class Artirst extends Component {
@@ -7,39 +8,59 @@ class Artirst extends Component {
         image: '',
         imageWidth: null,
         name: '',
-        genres: []
+        genres: [],
+        albums: [],
+        id: null
     }
 
     componentDidMount(){
-        const id = this.props.match.params.id;
-        this.getArtist(id);
+        this.getArtistInfo(this.state.id);
     }
 
-    async getArtist(id){
-        const url = `https://api.spotify.com/v1/artists/${id}`;
-        const token = 'BQA308cA8jsk3C3FeZtCzgZDuOdkPD8KeMa6IfrA6h6DyZf379bsceJg5PBu2zouMBvTo5ZNRU_uLRbvV1XtW7krK2NlQjmDco5gtYbKh82uT7ptuupSRmr5V1dGNb9nS_94yvmu47312hPk';
-        try{
-            const response = await fetch(url, { headers: { 'Authorization': `Bearer ${token}` }});
-            const data = await response.json();
-            this.setState({ image: data.images[2].url, imageWidth: data.images[2].width, name: data.name, genres: data.genres });
-        }catch(error) {
-            console.log(error)
+    componentDidUpdate() {
+        this.getArtistInfo(this.state.id);
+    }
+
+    async getArtistInfo(id){
+        if(this.state.id !== this.props.match.params.id){
+            this.setState({id: this.props.match.params.id});
+            const url = `https://api.spotify.com/v1/artists/${this.props.match.params.id}`;
+            const token = '';
+            try{
+                const response = await fetch(url, { headers: { 'Authorization': `Bearer ${token}` }});
+                const data = await response.json();
+                this.setState({ image: data.images[2].url, imageWidth: data.images[1].width, name: data.name, genres: data.genres });
+            }catch(error) {
+                console.log(error)
+            }
+
+            const url_albums = `https://api.spotify.com/v1/artists/${this.props.match.params.id}/albums`
+            try{
+                const response = await fetch(url_albums, { headers: { 'Authorization': `Bearer ${token}` }});
+                const data = await response.json();
+                this.setState({ albums: data.items });
+            }catch(error) {
+                console.log(error)
+            }
         }
     }
 
     render(){
         return (
-            <div className="artist-content">
-                <img src={this.state.image} alt={this.state.name} style={{ width: this.state.imageWidth }} />
-                <div className="info">
-                    <h2>{this.state.name}</h2>
-                    <ul>
-                        {this.state.genres.map((gender, index) =>{
-                            return <li key={index}>{gender}</li>
-                        })}
-                    </ul>
+            <React.Fragment>
+                <div className="artist-content">
+                    <img src={this.state.image} alt={this.state.name} style={{ maxWidth: this.state.imageWidth }} />
+                    <div className="info">
+                        <h2>{this.state.name}</h2>
+                        <ul>
+                            {this.state.genres.map((gender, index) =>{
+                                return <li key={index}>{gender}</li>
+                            })}
+                        </ul>
+                    </div>
                 </div>
-            </div>
+                <Albums items={this.state.albums} />
+            </React.Fragment>
         );
     }
 }

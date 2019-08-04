@@ -13,9 +13,12 @@ header{
         display: flex;
     }
     padding: 20px 0;
+    height: 60px;
     background: $grey;
     .img_container{
         width: 48px;
+        min-width: 48px;
+        margin-right: 20px;
         img{
             width: 100%;
         }
@@ -26,6 +29,13 @@ header{
     }
 }
 
-.search-content{
-    padding-top: 80px; 
+.content{
+    padding-top: 60px; 
+}
+
+@media(max-width: 1350px){
+    .container{
+        width: 95%;
+        margin: auto;
+    }
 }

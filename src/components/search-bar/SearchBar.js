@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import Popup from './popup/popup';
 import './SearchBar.scss';
 
@@ -19,6 +20,16 @@ class SearchBar extends Component {
         }
     }
 
+    handleSubmit = (e) => {
+        e.preventDefault();
+        this.props.history.push(`/artist/${this.state.artists[0].id}`);
+        this.setState({ artists: [] });
+    }
+    
+    hidePopup = () => {
+        this.setState({ showPopup: false });
+    }
+
     async getArtists(value){
         const url = `https://api.spotify.com/v1/search?q=${value}&type=artist&limit=5`;
         const token = '';
@@ -33,13 +44,13 @@ class SearchBar extends Component {
 
     render(){
         return (
-            <form action="" method="POST" className="search-form">
+            <form action="" method="POST" className="search-form" onSubmit={this.handleSubmit}>
                 <i className="fas fa-search"></i>
                 <input type="text" placeholder="Artist Name ..." onChange={this.handleChange} />
-                <Popup items={this.state.artists} show={this.state.showPopup} />
+                <Popup items={this.state.artists} show={this.state.showPopup} click={this.hidePopup} />
             </form>
         );
     }
 }
 
-export default SearchBar;
+export default withRouter(SearchBar);

@@ -9,7 +9,7 @@ const Popup = (props) => {
     if(props.show){
         popupContent = (
             <ul className="list-suggestion">
-                { props.items.map((item) => <li key={item.id}><Link to={`artist/${item.id}`}>{item.name}</Link></li>) }
+                { props.items.map((item) => <li key={item.id}><Link to={`/artist/${item.id}`} onClick={props.click}>{item.name}</Link></li>) }
             </ul>
         );
     }

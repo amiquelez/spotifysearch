@@ -1,0 +1,27 @@
+.albums_list{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    .item{
+        display: flex;
+        width: 49%;
+        min-width: 400px;
+        padding-right: 1%;
+        margin-bottom: 18px;
+        .img_content{
+            max-width: 200px;
+            margin-right: 18px;
+            img{
+                width: 100%;
+            }
+        }
+        .info{
+            h4{
+                margin-bottom: 6px;
+            }
+            p{
+                margin-bottom: 4px;
+            }
+        }
+    }
+}
