@@ -1,0 +1,22 @@
+.songs_list{
+    margin-bottom: 50px;
+    .song_item{
+        border: 1px solid #000000;
+        border-bottom: none;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 20px;
+        &:last-child{
+            border-bottom: 1px solid #000000;
+        }
+        audio{
+            border-radius: 0;
+            min-width: 300px;
+        }
+        span{
+            min-width: 400px;
+        }
+    }
+}

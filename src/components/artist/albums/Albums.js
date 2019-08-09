@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Albums.scss';
 
 const Albums = (props) => {
@@ -9,12 +10,14 @@ const Albums = (props) => {
                 item.artists.map(item => artistsList.push(item.name));
                  return <li key={item.id} className="item">
                             <div className="img_content" style={{ width: item.images[0].width }}>
-                                <img src={item.images[0].url} alt={item.name} />
+                                <Link to={`/album/${item.id}`}><img src={item.images[0].url} alt={item.name} /></Link>
                             </div>
                             <div className="info">
-                                <h4>{item.name}</h4>
-                                <p>{artistsList.join(", ")}</p>
-                                <span>{item.release_date.split('-')[0]}</span>
+                                <Link to={`/album/${item.id}`}>
+                                    <h4>{item.name}</h4>
+                                    <p>{artistsList.join(", ")}</p>
+                                    <span>{item.release_date.split('-')[0]}</span>
+                                </Link>
                             </div>
                         </li>
             }) : null}

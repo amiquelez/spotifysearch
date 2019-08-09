@@ -2,6 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
+import axios from 'axios';
+
+const token = '';
+axios.defaults.baseURL = 'https://api.spotify.com/v1/';
+axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

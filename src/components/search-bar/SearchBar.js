@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import axios from 'axios';
+
 import Popup from './popup/popup';
 import './SearchBar.scss';
 
@@ -22,24 +24,25 @@ class SearchBar extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.history.push(`/artist/${this.state.artists[0].id}`);
-        this.setState({ artists: [] });
+        if(this.state.artists[0]){
+            this.props.history.push(`/artist/${this.state.artists[0].id}`);
+            this.setState({ artists: [] });
+        }
     }
     
     hidePopup = () => {
         this.setState({ showPopup: false });
     }
 
-    async getArtists(value){
-        const url = `https://api.spotify.com/v1/search?q=${value}&type=artist&limit=5`;
-        const token = '';
-        try{
-            const response = await fetch(url, { headers: { 'Authorization': `Bearer ${token}` }});
-            const data = await response.json();
+    getArtists(value){
+        const url = `search?q=${value}&type=artist&limit=5`;
+        
+        axios.get(url).then(response => {
+            const data = response.data;
             this.setState({ artists: data.artists.items });
-        }catch(error) {
+        }).catch(error => {
             console.log(error)
-        }
+        });
     }
 
     render(){

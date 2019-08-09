@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+
 import Albums from './albums/Albums';
 import './Artist.scss';
 
@@ -10,7 +12,9 @@ class Artirst extends Component {
         name: '',
         genres: [],
         albums: [],
-        id: null
+        id: null,
+        errorArtist: false,
+        errorAlbums: false
     }
 
     componentDidMount(){
@@ -21,34 +25,35 @@ class Artirst extends Component {
         this.getArtistInfo(this.state.id);
     }
 
-    async getArtistInfo(id){
+    getArtistInfo(id){
         if(this.state.id !== this.props.match.params.id){
             this.setState({id: this.props.match.params.id});
-            const url = `https://api.spotify.com/v1/artists/${this.props.match.params.id}`;
-            const token = '';
-            try{
-                const response = await fetch(url, { headers: { 'Authorization': `Bearer ${token}` }});
-                const data = await response.json();
-                this.setState({ image: data.images[2].url, imageWidth: data.images[1].width, name: data.name, genres: data.genres });
-            }catch(error) {
-                console.log(error)
-            }
+            const url = `artists/${this.props.match.params.id}`;
+            axios.get(url).then(response => {
+                    const data = response.data;
+                    this.setState({ image: data.images[2].url, imageWidth: data.images[1].width, name: data.name, genres: data.genres });
+                })
+                .catch(error => {
+                    this.setState({ errorArtist: true });
+                });
 
-            const url_albums = `https://api.spotify.com/v1/artists/${this.props.match.params.id}/albums`
-            try{
-                const response = await fetch(url_albums, { headers: { 'Authorization': `Bearer ${token}` }});
-                const data = await response.json();
-                this.setState({ albums: data.items });
-            }catch(error) {
-                console.log(error)
-            }
+            const url_albums = `artists/${this.props.match.params.id}/albums`
+                axios.get(url_albums).then(response => {
+                        const data = response.data;
+                        this.setState({ albums: data.items });
+                    })
+                    .catch(error => {
+                        this.setState({ errorAlbums: true });
+                    });
         }
     }
 
     render(){
-        return (
-            <React.Fragment>
-                <div className="artist-content">
+        let artistContent = 'There was a problem loading the artist info. Please try again.';
+        let albumsContent = 'There was a problem loading the albums of the artist. Please try again.';
+        if(!this.state.errorArtist){
+            artistContent = (
+                <React.Fragment>
                     <img src={this.state.image} alt={this.state.name} style={{ maxWidth: this.state.imageWidth }} />
                     <div className="info">
                         <h2>{this.state.name}</h2>
@@ -58,8 +63,18 @@ class Artirst extends Component {
                             })}
                         </ul>
                     </div>
+                </React.Fragment>
+            );
+        }
+        if(!this.state.errorAlbums){
+            albumsContent = <Albums items={this.state.albums} />;
+        }
+        return (
+            <React.Fragment>
+                <div className="artist-content">
+                    {artistContent}
                 </div>
-                <Albums items={this.state.albums} />
+                {albumsContent}
             </React.Fragment>
         );
     }
