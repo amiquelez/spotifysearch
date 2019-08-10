@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import SongList from './song-list/SongList';
-import './Album.scss';
 
 class Album extends Component {
 
@@ -46,7 +45,7 @@ class Album extends Component {
     render(){
         return (
             <React.Fragment>
-                <div className="album-content">
+                <div className="content-box">
                     <div className="img_content">
                         <img src={this.state.image} alt={this.state.name} />
                     </div>
