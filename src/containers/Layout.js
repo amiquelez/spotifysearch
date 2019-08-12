@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import Header from '../components/header/Header';
-import SearchBar from '../components/search-bar/SearchBar';
+import Home from '../components/home/Home';
 import Artirst from '../components/artist/Artist';
 import Album from '../components/album/Album';
 import Song from '../components/song/Song';
@@ -17,7 +17,7 @@ const Layout = () => {
       </Switch>
       <div className="content">
         <div className="container">
-         <Route path="/" exact component={SearchBar} />
+         <Route path="/" exact component={Home} />
          <Route path="/artist/:id" component={Artirst} />
          <Route path="/album/:id" component={Album} />
          <Route path="/song/:id" component={Song} />

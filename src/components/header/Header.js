@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import SearchBar from '../search-bar/SearchBar';
+import SearchBar from '../../shared/search-bar/SearchBar';
 import Logo from '../../assets/images/spotify_logo.gif';
 
 const Header = (props) => {

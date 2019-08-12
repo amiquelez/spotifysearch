@@ -1,15 +1,28 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
+import * as actionTypes from '../../../store/actions';
 import './SongList.scss';
 
 const SongList = (props) => {
     let songs = props.songs.map(song => {
+        let star = <div className="add_favorite star-content" onClick={() => props.onAddToFavorite(song.id)}>
+                        <i className="far fa-star"></i>
+                    </div>;
+        if(props.favorites.includes(song.id)){
+            star =  <div className="remove_favorite star-content" onClick={() => props.onRemoveFavorite(song.id)}>
+                        <i className="fas fa-star"></i>
+                    </div>;
+        }
         return <li key={song.id} className="song_item">
                     <Link to={`/song/${song.id}`}><span>{song.name}</span></Link>
-                    <audio controls name="media">
-                        <source src={song.preview_url} type="audio/mpeg" />
-                    </audio>
+                    <div className="audio_content">
+                        <audio controls name="media">
+                            <source src={song.preview_url} type="audio/mpeg" />
+                        </audio>
+                        { star }
+                    </div>
                 </li>
     });
     return (
@@ -19,4 +32,17 @@ const SongList = (props) => {
     );
 }
 
-export default SongList;
+const mapStateToProps = state => {
+    return {
+        favorites: state.favorites
+    };
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onAddToFavorite: (songId) => dispatch({ type: actionTypes.ADD_TO_FAVORITE, songId: songId }),
+        onRemoveFavorite: (songId) => dispatch({ type: actionTypes.REMOVE_FAVORITE, songId: songId })
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SongList);

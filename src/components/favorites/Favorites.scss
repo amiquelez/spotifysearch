@@ -1,0 +1,16 @@
+.favorites{
+    display: flex;
+    flex-wrap: wrap;
+    border-top: 1px solid #000000;
+    margin-top: 80px;
+    padding-top: 50px;
+    .content-box{
+        border-bottom: none;
+        width: calc(50% - 32px);
+        border: 1px solid #000000;
+        padding: 10px;
+    }
+    .content-box:nth-child(odd){
+        margin-right: 10px;
+    }
+}

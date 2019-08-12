@@ -11,12 +11,20 @@
         &:last-child{
             border-bottom: 1px solid #000000;
         }
-        audio{
-            border-radius: 0;
-            min-width: 300px;
-        }
         span{
             min-width: 400px;
+        }
+        .audio_content{
+            display: flex;
+            audio{
+                border-radius: 0;
+                min-width: 300px;
+                margin-right: 16px;
+            }
+            .star-content{
+                display: flex;
+                align-items: center;
+            }
         }
     }
 }
