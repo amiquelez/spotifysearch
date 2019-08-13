@@ -17,6 +17,7 @@ const Favorites = props => {
                             <p>{artistsList.join(", ")}</p>
                             <span>{item.album.name}</span>
                         </div>
+                        <button id="btn_remove" onClick={() => props.removeFavorite(item.id)}>Remove</button>
                     </li>;
             });
             favContent = <ul className="favorites">{favItems}</ul>;

@@ -9,6 +9,18 @@
         width: calc(50% - 32px);
         border: 1px solid #000000;
         padding: 10px;
+        .info{
+            width: 350px;
+        }
+        #btn_remove{
+            padding: 10px;
+            font-size: 18px;
+            border-radius: 4px;
+            background: rgba(0,0,0,0.2);
+            border: 1px solid #000000;
+            align-self: flex-end;
+            cursor: pointer;
+        }
     }
     .content-box:nth-child(odd){
         margin-right: 10px;
