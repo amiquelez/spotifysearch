@@ -40,8 +40,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAddToFavorite: (songId) => dispatch({ type: actionTypes.ADD_TO_FAVORITE, songId: songId }),
-        onRemoveFavorite: (songId) => dispatch({ type: actionTypes.REMOVE_FAVORITE, songId: songId })
+        onAddToFavorite: (songId) => dispatch({ type: actionTypes.ADD_TO_FAVORITE_AND_UPDATE, songId: songId }),
+        onRemoveFavorite: (songId) => dispatch({ type: actionTypes.REMOVE_FAVORITE_AND_UPDATE, songId: songId })
     };
 }
 

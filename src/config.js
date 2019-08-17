@@ -1,6 +1,9 @@
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import reducer from './store/reducer';
 import axios from 'axios';
+import createSagaMiddleware from 'redux-saga';
+
+import { watchFavorites } from './store/sagas';
 
 const token = '';
 axios.defaults.baseURL = 'https://api.spotify.com/v1/';
@@ -28,11 +31,15 @@ const loadFromLocalStorage = () => {
 
 const persistedState = loadFromLocalStorage();
 
+const sagaMiddleware = createSagaMiddleware();
+
 const store = createStore(
     reducer,
     persistedState,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-    );
+    applyMiddleware(sagaMiddleware)
+);
+
+sagaMiddleware.run(watchFavorites);
 
 store.subscribe(() => saveToLocalStorage(store.getState()));
 
