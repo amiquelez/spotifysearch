@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import * as actionTypes from '../../../store/actions';
+import * as actionCreators from '../../../store/actions';
 import './SongList.scss';
 
 const SongList = (props) => {
@@ -40,8 +40,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAddToFavorite: (songId) => dispatch({ type: actionTypes.ADD_TO_FAVORITE_AND_UPDATE, songId: songId }),
-        onRemoveFavorite: (songId) => dispatch({ type: actionTypes.REMOVE_FAVORITE_AND_UPDATE, songId: songId })
+        onAddToFavorite: (songId) => dispatch(actionCreators.addToFavoriteAndUpdate(songId)),
+        onRemoveFavorite: (songId) => dispatch(actionCreators.removeFavoriteAndUpdate(songId))
     };
 }
 

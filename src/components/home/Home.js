@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import * as actionTypes from '../../store/actions';
+import * as actionCreators from '../../store/actions';
 import SearchBar from '../../shared/search-bar/SearchBar';
 import Favorites from '../favorites/Favorites';
 
@@ -23,7 +23,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onRemoveFavorite: (songId) => dispatch({ type: actionTypes.REMOVE_FAVORITE_AND_UPDATE, songId: songId })
+        onRemoveFavorite: (songId) => dispatch(actionCreators.removeFavoriteAndUpdate(songId))
     };
 };
 

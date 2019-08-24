@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware } from 'redux';
-import reducer from './store/reducer';
+import favoritesReducer from './store/reducers/favorites';
 import axios from 'axios';
 import createSagaMiddleware from 'redux-saga';
 
@@ -34,7 +34,7 @@ const persistedState = loadFromLocalStorage();
 const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(
-    reducer,
+    favoritesReducer,
     persistedState,
     applyMiddleware(sagaMiddleware)
 );

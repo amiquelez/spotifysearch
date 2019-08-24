@@ -1,6 +1,6 @@
 import { takeEvery } from 'redux-saga/effects';
 
-import * as actionTypes from '../actions';
+import * as actionTypes from '../actions/actionTypes';
 import { addToFavoritesSaga, removeFromFavoritesSaga, updateFavoritesSaga } from './favorites';
 
 export function* watchFavorites() {

@@ -1,7 +1,7 @@
 import { put, select } from 'redux-saga/effects';
 import axios from 'axios';
 
-import * as actionTypes from '../actions';
+import * as actionTypes from '../actions/actionTypes';
 
 export function* addToFavoritesSaga(action){
     yield put({type: actionTypes.ADD_TO_FAVORITE, songId: action.songId});
