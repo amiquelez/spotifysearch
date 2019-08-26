@@ -10,10 +10,10 @@ const reducer = (state = initialState, action) => {
         case actionTypes.ADD_TO_FAVORITE:
             return {
                 ...state,
-                favorites: state.favorites.concat(action.songId)
+                favorites: state.favorites.concat(action.trackId)
             };
         case actionTypes.REMOVE_FAVORITE:
-            const newFavorites = state.favorites.filter(favorite => favorite !== action.songId)
+            const newFavorites = state.favorites.filter(favorite => favorite !== action.trackId)
             return {
                 ...state,
                 favorites: newFavorites

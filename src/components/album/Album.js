@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import * as action from '../../store/actions';
-import SongList from './song-list/SongList';
+import TrackList from './track-list/TrackList';
 import Spinner from '../../shared/spinner/Spinner';
 import Error from '../../shared/error/Error';
 
@@ -37,7 +37,7 @@ class Album extends Component {
         }
 
         if(!this.props.errorTracks){
-            tracksContent = <SongList songs={this.props.tracks} />;
+            tracksContent = <TrackList tracks={this.props.tracks} />;
         }
         if(this.props.loadingTracks){
             tracksContent = <Spinner />;

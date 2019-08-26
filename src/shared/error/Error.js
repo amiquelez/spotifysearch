@@ -18,6 +18,9 @@ const Error = (props) => {
         case "ALBUM_TRACKS":
             errorMsg = error.ALBUM_TRACKS;
             break;
+        case "TRACK_INFO":
+            errorMsg = error.TRACK_INFO;
+            break;
         default:
             errorMsg = error.GENERAL;
     }

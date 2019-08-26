@@ -26,3 +26,9 @@ export {
     fetchAlbumTracksSuccess,
     fetchAlbumTracksFail
 } from './album';
+export {
+    fetchTrackInfo,
+    fetchTrackInfoStart,
+    fetchTrackInfoSuccess,
+    fetchTrackInfoFail
+} from './track';

@@ -23,7 +23,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onRemoveFavorite: (songId) => dispatch(action.removeFavoriteAndUpdate(songId))
+        onRemoveFavorite: (trackId) => dispatch(action.removeFavoriteAndUpdate(trackId))
     };
 };
 

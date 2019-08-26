@@ -5,7 +5,7 @@ import Header from '../components/header/Header';
 import Home from '../components/home/Home';
 import Artirst from '../components/artist/Artist';
 import Album from '../components/album/Album';
-import Song from '../components/song/Song';
+import Track from '../components/track/Track';
 import './Layout.scss';
 
 const Layout = () => {
@@ -20,7 +20,7 @@ const Layout = () => {
          <Route path="/" exact component={Home} />
          <Route path="/artist/:id" component={Artirst} />
          <Route path="/album/:id" component={Album} />
-         <Route path="/song/:id" component={Song} />
+         <Route path="/track/:id" component={Track} />
         </div>
       </div>
     </React.Fragment>

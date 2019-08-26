@@ -1,30 +1,30 @@
 import * as actionTypes from './actionTypes';
 
-export const addToFavorite = (songId) => {
+export const addToFavorite = (trackId) => {
      return {
          type: actionTypes.ADD_TO_FAVORITE,
-         songId: songId
+         trackId: trackId
      }
 };
 
-export const addToFavoriteAndUpdate = (songId) => {
+export const addToFavoriteAndUpdate = (trackId) => {
     return {
         type: actionTypes.ADD_TO_FAVORITE_AND_UPDATE, 
-        songId: songId
+        trackId: trackId
     }
 };
 
-export const removeFavorite = (songId) => {
+export const removeFavorite = (trackId) => {
     return {
         type: actionTypes.REMOVE_FAVORITE,
-        songId: songId
+        trackId: trackId
     }
 };
 
-export const removeFavoriteAndUpdate = (songId) => {
+export const removeFavoriteAndUpdate = (trackId) => {
    return {
        type: actionTypes.REMOVE_FAVORITE_AND_UPDATE, 
-       songId: songId
+       trackId: trackId
    }
 };
 

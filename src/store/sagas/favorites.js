@@ -4,12 +4,12 @@ import axios from 'axios';
 import * as actions from '../actions';
 
 export function* addToFavoritesSaga(action){
-    yield put(actions.addToFavorite(action.songId));
+    yield put(actions.addToFavorite(action.trackId));
     yield put(actions.updateFavoritesAsync());
 }
 
 export function* removeFromFavoritesSaga(action){
-    yield put(actions.removeFavorite(action.songId));
+    yield put(actions.removeFavorite(action.trackId));
     yield put(actions.updateFavoritesAsync());
 }
 

@@ -4,6 +4,7 @@ import * as actionTypes from '../actions/actionTypes';
 import { addToFavoritesSaga, removeFromFavoritesSaga, updateFavoritesSaga } from './favorites';
 import { fetchArtistInfoSaga, fetchArtistAlbumsSaga } from './artist';
 import { fetchAlbumInfoSaga, fetchAlbumTracksSaga } from './album';
+import { fetchTrackInfoSaga } from './track';
 
 export function* watchFavorites() {
     yield takeLatest(actionTypes.ADD_TO_FAVORITE_AND_UPDATE, addToFavoritesSaga);
@@ -19,4 +20,8 @@ export function* watchArtist() {
 export function* watchAlbum() {
     yield takeLatest(actionTypes.FETCH_ALBUM_INFO, fetchAlbumInfoSaga);
     yield takeLatest(actionTypes.FETCH_ALBUM_TRACKS, fetchAlbumTracksSaga);
+}
+
+export function* watchTrack() {
+    yield takeLatest(actionTypes.FETCH_TRACK_INFO, fetchTrackInfoSaga);
 }
