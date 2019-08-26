@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import * as action from '../../store/actions';
 import Albums from './albums/Albums';
 import Spinner from '../../shared/spinner/Spinner';
-import './Artist.scss';
+import Error from '../../shared/error/Error';
 
 class Artirst extends Component {
 
@@ -25,12 +25,14 @@ class Artirst extends Component {
     }
 
     render(){
-        let artistContent = 'There was a problem loading the artist info. Please try again.';
-        let albumsContent = 'There was a problem loading the albums of the artist. Please try again.';
+        let artistContent = <Error type="ARTIST_INFO" />;
+        let albumsContent = <Error type="ARTIST_ALBUMS" />;
         if(!this.props.errorInfo){
             artistContent = (
-                <React.Fragment>
-                    <img src={this.props.image} alt={this.props.name} style={{ maxWidth: this.props.imageWidth }} />
+                <div className="content-box">
+                    <div className="img_content">
+                        <img src={this.props.image} alt={this.props.name} />
+                    </div>
                     <div className="info">
                         <h2>{this.props.name}</h2>
                         <ul>
@@ -40,7 +42,7 @@ class Artirst extends Component {
                             })}
                         </ul>
                     </div>
-                </React.Fragment>
+                </div>
             );
         }
         if(this.props.loadingInfo){

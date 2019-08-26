@@ -1,5 +1,6 @@
 .content-box{
     display: flex;
+    width: 100%;
     border-bottom: 1px solid #000000;
     margin-bottom: 22px;
     padding-bottom: 22px;
@@ -11,6 +12,11 @@
         }
     }
     .info{
+        margin-left: 12px;
+        h2{
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
         h4{
             margin-bottom: 6px;
             font-size: 20px;

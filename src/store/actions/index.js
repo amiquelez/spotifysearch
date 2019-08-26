@@ -16,3 +16,13 @@ export {
     fetchArtistAlbumsSuccess,
     fetchArtistAlbumsFail
 } from './artist';
+export {
+    fetchAlbumInfo,
+    fetchAlbumInfoStart,
+    fetchAlbumInfoSuccess,
+    fetchAlbumInfoFail,
+    fetchAlbumTracks,
+    fetchAlbumTracksStart,
+    fetchAlbumTracksSuccess,
+    fetchAlbumTracksFail
+} from './album';

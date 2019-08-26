@@ -25,9 +25,8 @@ const reducer = (state = initialState, action) => {
             const {images, name, genres} = action.data;
             return {
                 ...state,
-                image: images[2].url, 
-                imageWidth: images[1].width,
-                name: name, 
+                image: images[0].url, 
+                name: name,
                 genres: genres,
                 errorInfo: false,
                 loadingInfo: false

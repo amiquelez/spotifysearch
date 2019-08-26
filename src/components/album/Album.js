@@ -1,64 +1,76 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
 
+import * as action from '../../store/actions';
 import SongList from './song-list/SongList';
+import Spinner from '../../shared/spinner/Spinner';
+import Error from '../../shared/error/Error';
 
 class Album extends Component {
 
-    state = {
-        image: '',
-        name: '',
-        artistsList: [],
-        release_date: '',
-        songs: []
-    }
-
     componentDidMount(){
-        this.getAlbumInfo();
-        this.getTracks();
-    }
-
-    getAlbumInfo(){
-        const url = `albums/${this.props.match.params.id}`;
-        
-         axios.get(url).then(response => {
-            const data = response.data;
-            let artistsList = [];
-            data.artists.map(item => artistsList.push(item.name));
-            this.setState({ image: data.images[1].url, name: data.name, artistsList, release_date: data.release_date });
-        }).catch(error => {
-            console.log(error)
-        });
-    }
-
-    getTracks(){
-        const url = `albums/${this.props.match.params.id}/tracks/`;
-        
-        axios.get(url).then(response => {
-            const data = response.data;
-            this.setState({ songs: data.items });
-        }).catch(error => {
-            console.log(error)
-        });
+        const id = this.props.match.params.id;
+        this.props.fetchAlbumInfo(id);
+        this.props.fetchAlbumTracks(id);
     }
 
     render(){
-        return (
-            <React.Fragment>
+        let albumContent = <Error type="ALBUM_INFO" />;
+        let tracksContent = <Error type="ALBUM_TRACKS" />;
+
+        if(!this.props.errorInfo){
+            albumContent = (
                 <div className="content-box">
                     <div className="img_content">
-                        <img src={this.state.image} alt={this.state.name} />
+                        <img src={this.props.image} alt={this.props.name} />
                     </div>
                     <div className="info">
-                        <h4>{this.state.name}</h4>
-                        <p>{this.state.artistsList.join(", ")}</p>
-                        <span>{this.state.release_date.split('-')[0]}</span>
+                        <h4>{this.props.name}</h4>
+                        <p>{this.props.artistsList.join(", ")}</p>
+                        <span>{this.props.release_date.split('-')[0]}</span>
                     </div>
                 </div>
-                <SongList songs={this.state.songs} />
+            );
+        }
+        if(this.props.loadingInfo){
+            albumContent = <Spinner />;
+        }
+
+        if(!this.props.errorTracks){
+            tracksContent = <SongList songs={this.props.tracks} />;
+        }
+        if(this.props.loadingTracks){
+            tracksContent = <Spinner />;
+        }
+
+        return (
+            <React.Fragment>
+                { albumContent }
+                { tracksContent }
             </React.Fragment>
         );
     }
 }
 
-export default Album;
+const mapStateToProps = state => {
+    return {
+        image: state.album.image,
+        name: state.album.name,
+        artistsList: state.album.artistsList,
+        release_date: state.album.release_date,
+        tracks: state.album.tracks,
+        errorInfo: state.album.errorInfo,
+        errorTracks: state.album.errorTracks,
+        loadingInfo: state.album.loadingInfo,
+        loadingTracks: state.album.loadingTracks
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchAlbumInfo: (id) => dispatch(action.fetchAlbumInfo(id)),
+        fetchAlbumTracks: (id) => dispatch(action.fetchAlbumTracks(id))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Album);
