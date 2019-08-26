@@ -1,9 +1,10 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import favoritesReducer from './store/reducers/favorites';
+import artistReducer from './store/reducers/artist';
 import axios from 'axios';
 import createSagaMiddleware from 'redux-saga';
 
-import { watchFavorites } from './store/sagas';
+import { watchFavorites, watchArtist } from './store/sagas';
 
 const token = '';
 axios.defaults.baseURL = 'https://api.spotify.com/v1/';
@@ -33,13 +34,19 @@ const persistedState = loadFromLocalStorage();
 
 const sagaMiddleware = createSagaMiddleware();
 
+const rootReducer = combineReducers({
+    favorites: favoritesReducer,
+    artist: artistReducer
+});
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
-    favoritesReducer,
+    rootReducer,
     persistedState,
-    applyMiddleware(sagaMiddleware)
+    composeEnhancers(applyMiddleware(sagaMiddleware))
 );
 
 sagaMiddleware.run(watchFavorites);
+sagaMiddleware.run(watchArtist);
 
 store.subscribe(() => saveToLocalStorage(store.getState()));
 

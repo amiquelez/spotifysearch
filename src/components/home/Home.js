@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import * as actionCreators from '../../store/actions';
+import * as action from '../../store/actions';
 import SearchBar from '../../shared/search-bar/SearchBar';
 import Favorites from '../favorites/Favorites';
 
@@ -16,14 +16,14 @@ const Home = (props) => {
 
 const mapStateToProps = state => {
     return {
-        favorites: state.favorites,
-        tracks: state.favoritesData
+        favorites: state.favorites.favorites,
+        tracks: state.favorites.favoritesData
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        onRemoveFavorite: (songId) => dispatch(actionCreators.removeFavoriteAndUpdate(songId))
+        onRemoveFavorite: (songId) => dispatch(action.removeFavoriteAndUpdate(songId))
     };
 };
 

@@ -1,27 +1,32 @@
 import { put, select } from 'redux-saga/effects';
 import axios from 'axios';
 
-import * as actionTypes from '../actions/actionTypes';
+import * as actions from '../actions';
 
 export function* addToFavoritesSaga(action){
-    yield put({type: actionTypes.ADD_TO_FAVORITE, songId: action.songId});
-    yield put({type: actionTypes.UPDATE_FAVORITES_ASYNC})
+    yield put(actions.addToFavorite(action.songId));
+    yield put(actions.updateFavoritesAsync());
 }
 
 export function* removeFromFavoritesSaga(action){
-    yield put({type: actionTypes.REMOVE_FAVORITE, songId: action.songId});
-    yield put({type: actionTypes.UPDATE_FAVORITES_ASYNC })
+    yield put(actions.removeFavorite(action.songId));
+    yield put(actions.updateFavoritesAsync());
 }
 
-export function* updateFavoritesSaga(action){
+export function* updateFavoritesSaga(){
     const state = yield select();
-    const favIds = yield state.favorites.join(',');
-    const url = yield `tracks/?ids=${favIds}`;
-    try{
-    const response = yield axios.get(url);
-    const data = yield response.data;
-    yield put({type: actionTypes.UPDATE_FAVORITES, tracks: data.tracks});
-    } catch(error) {
-        console.log(error);
-    };
+    const favorites = state.favorites.favorites;
+    if(favorites && favorites.length > 0){
+        const favIds = yield favorites.join(',');
+        const url = yield `tracks/?ids=${favIds}`;
+        try{
+            const response = yield axios.get(url);
+            const data = yield response.data;
+            yield put(actions.updateFavorites(data.tracks));
+        } catch(error) {
+            console.log(error);
+        };
+    }else{
+        yield put(actions.updateFavorites([]));
+    }
 }
