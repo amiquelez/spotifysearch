@@ -2,6 +2,7 @@ import { put, select } from 'redux-saga/effects';
 import axios from 'axios';
 
 import * as actions from '../actions';
+import * as constant from '../../constants';
 
 export function* addToFavoritesSaga(action){
     yield put(actions.addToFavorite(action.trackId));
@@ -18,7 +19,7 @@ export function* updateFavoritesSaga(){
     const favorites = state.favorites.favorites;
     if(favorites && favorites.length > 0){
         const favIds = yield favorites.join(',');
-        const url = yield `tracks/?ids=${favIds}`;
+        const url = yield `${constant.TRACKS}/?${constant.IDS}=${favIds}`;
         try{
             const response = yield axios.get(url);
             const data = yield response.data;

@@ -7,9 +7,10 @@ import artistReducer from './store/reducers/artist';
 import albumReducer from './store/reducers/album';
 import trackReducer from './store/reducers/track';
 import { watchFavorites, watchArtist, watchAlbum, watchTrack } from './store/sagas';
+import * as constant from './constants';
 
-const token = '';
-axios.defaults.baseURL = 'https://api.spotify.com/v1/';
+const token = constant.TOKEN;
+axios.defaults.baseURL = constant.API_URL;
 axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
 const saveToLocalStorage = (state) => {
