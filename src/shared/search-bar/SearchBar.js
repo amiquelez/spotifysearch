@@ -1,21 +1,22 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import axios from 'axios';
 
+import * as action from '../../store/actions';
 import Popup from './popup/popup';
+import Spinner from '../spinner/Spinner';
 import './SearchBar.scss';
 
 class SearchBar extends Component {
 
     state = {
-        artists: [],
         showPopup: false
     }
 
     handleChange = (e) => {
         const value = e.target.value.trim();
         if(value.length >= 1){
-            this.getArtists(value);
+            this.props.fetchArtists(value);
             this.setState({ showPopup: true });
         }else{
             this.setState({ showPopup: false });
@@ -24,8 +25,8 @@ class SearchBar extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        if(this.state.artists[0]){
-            this.props.history.push(`/artist/${this.state.artists[0].id}`);
+        if(this.props.artists[0]){
+            this.props.history.push(`/artist/${this.props.artists[0].id}`);
             this.setState({ artists: [] });
         }
     }
@@ -34,26 +35,34 @@ class SearchBar extends Component {
         this.setState({ showPopup: false });
     }
 
-    getArtists(value){
-        const url = `search?q=${value}&type=artist&limit=5`;
-        
-        axios.get(url).then(response => {
-            const data = response.data;
-            this.setState({ artists: data.artists.items });
-        }).catch(error => {
-            console.log(error)
-        });
-    }
-
     render(){
+        let result = <Popup items={this.props.artists} show={this.state.showPopup} click={this.hidePopup} />;
+        if(this.props.loading){
+            result = <div className="content-spinner"><Spinner /></div>;
+        }
+
         return (
             <form action="" method="POST" className="search-form" onSubmit={this.handleSubmit}>
                 <i className="fas fa-search"></i>
                 <input type="text" placeholder="Artist Name ..." onChange={this.handleChange} />
-                <Popup items={this.state.artists} show={this.state.showPopup} click={this.hidePopup} />
+                {result}
             </form>
         );
     }
 }
 
-export default withRouter(SearchBar);
+const mapStateToProps = state => {
+    return {
+        artists: state.search.artists,
+        loading: state.search.loading
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchArtists: (value) => dispatch(action.fetchArtists(value))
+    };
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SearchBar));

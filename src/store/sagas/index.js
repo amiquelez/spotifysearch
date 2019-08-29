@@ -5,6 +5,7 @@ import { addToFavoritesSaga, removeFromFavoritesSaga, updateFavoritesSaga } from
 import { fetchArtistInfoSaga, fetchArtistAlbumsSaga } from './artist';
 import { fetchAlbumInfoSaga, fetchAlbumTracksSaga } from './album';
 import { fetchTrackInfoSaga } from './track';
+import { fetchArtistsSaga } from './search';
 
 export function* watchFavorites() {
     yield takeLatest(actionTypes.ADD_TO_FAVORITE_AND_UPDATE, addToFavoritesSaga);
@@ -24,4 +25,8 @@ export function* watchAlbum() {
 
 export function* watchTrack() {
     yield takeLatest(actionTypes.FETCH_TRACK_INFO, fetchTrackInfoSaga);
+}
+
+export function* watchSearch() {
+    yield takeLatest(actionTypes.FETCH_ARTISTS, fetchArtistsSaga);
 }

@@ -32,3 +32,9 @@ export {
     fetchTrackInfoSuccess,
     fetchTrackInfoFail
 } from './track';
+export {
+    fetchArtists,
+    fetchArtistsStart,
+    fetchArtistsSuccess,
+    fetchArtistsFail
+} from './search';

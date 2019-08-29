@@ -1,5 +1,6 @@
 .search-form{
     width: 600px;
+    height: 60px;
     margin: auto;
     position: relative;
     input[type=text]{
@@ -14,5 +15,15 @@
         top: 20px;
         left: 12px;
         font-size: 22px;
+    }
+    .content-spinner{
+        position: absolute;
+        top: 0;
+        right: 0;
+        .loader{
+            width: 3em;
+            height: 3em;
+            margin: 15px;
+        }
     }
 }

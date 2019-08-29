@@ -6,7 +6,8 @@ import favoritesReducer from './store/reducers/favorites';
 import artistReducer from './store/reducers/artist';
 import albumReducer from './store/reducers/album';
 import trackReducer from './store/reducers/track';
-import { watchFavorites, watchArtist, watchAlbum, watchTrack } from './store/sagas';
+import searchReducer from './store/reducers/search';
+import { watchFavorites, watchArtist, watchAlbum, watchTrack, watchSearch } from './store/sagas';
 import * as constant from './constants';
 
 const token = constant.TOKEN;
@@ -41,7 +42,8 @@ const rootReducer = combineReducers({
     favorites: favoritesReducer,
     artist: artistReducer,
     album: albumReducer,
-    track: trackReducer
+    track: trackReducer,
+    search: searchReducer
 });
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
@@ -54,6 +56,7 @@ sagaMiddleware.run(watchFavorites);
 sagaMiddleware.run(watchArtist);
 sagaMiddleware.run(watchAlbum);
 sagaMiddleware.run(watchTrack);
+sagaMiddleware.run(watchSearch);
 
 store.subscribe(() => saveToLocalStorage(store.getState()));
 
