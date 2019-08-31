@@ -16,6 +16,7 @@
         }
         .audio_content{
             display: flex;
+            flex-wrap: wrap;
             audio{
                 border-radius: 0;
                 min-width: 300px;
@@ -26,5 +27,17 @@
                 align-items: center;
             }
         }
+    }
+}
+
+@media screen and (max-width: 680px){
+    .tracks_list .track_item span{
+        margin: 15px 0;
+        text-align: center;
+        min-width: 100%;
+        display: inline-block;
+    }
+    .audio_content .star-content{
+        margin: 15px auto;
     }
 }

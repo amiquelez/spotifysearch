@@ -22,7 +22,7 @@ const Favorites = props => {
                                 <span>{item.album.name}</span>
                             </Link>
                         </div>
-                        <button id="btn_remove" onClick={() => props.removeFavorite(item.id)}>Remove</button>
+                        <button className="btn_remove" onClick={() => props.removeFavorite(item.id)}>Remove</button>
                     </li>;
             });
             favContent = <ul className="favorites">{favItems}</ul>;

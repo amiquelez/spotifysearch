@@ -4,12 +4,14 @@
     width: 100%;
     .item{
         display: flex;
+        flex-wrap: wrap;
         width: 49%;
         min-width: 400px;
         padding-right: 1%;
         margin-bottom: 18px;
         .img_content{
-            max-width: 200px;
+            width: 200px;
+            min-width: 200px;
             margin-right: 18px;
             img{
                 width: 100%;
@@ -21,6 +23,23 @@
             }
             p{
                 margin-bottom: 4px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 680px){
+    .albums_list{
+        .item{
+            min-width: 100%;
+            .img_content{
+                width: 90%;
+                margin: auto;
+                margin-bottom: 15px;
+            }
+            .info{
+                margin-left: 5%;
+                margin-bottom: 27px;
             }
         }
     }

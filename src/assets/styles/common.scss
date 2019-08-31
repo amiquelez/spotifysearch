@@ -1,5 +1,6 @@
 .content-box{
     display: flex;
+    flex-wrap: wrap;
     width: 100%;
     border-bottom: 1px solid #000000;
     margin-bottom: 22px;
@@ -33,4 +34,17 @@
 .fa-star{
     font-size: 32px;
     cursor: pointer;
+}
+
+@media screen and (max-width: 680px){
+    .content-box{
+        .img_content{
+            max-width: 90%;
+            margin: auto;
+            margin-bottom: 25px;
+        }
+        .info{
+            margin-left: 5%;
+        }
+    }
 }

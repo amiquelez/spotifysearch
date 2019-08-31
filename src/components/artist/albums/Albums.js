@@ -9,7 +9,7 @@ const Albums = (props) => {
                 let artistsList = [];
                 item.artists.map(item => artistsList.push(item.name));
                  return <li key={item.id} className="item">
-                            <div className="img_content" style={{ width: item.images[0].width }}>
+                            <div className="img_content">
                                 <Link to={`/album/${item.id}`}><img src={item.images[0].url} alt={item.name} /></Link>
                             </div>
                             <div className="info">

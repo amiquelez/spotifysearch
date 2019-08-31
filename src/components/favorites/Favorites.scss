@@ -7,12 +7,15 @@
     .content-box{
         border-bottom: none;
         width: calc(50% - 32px);
+        min-width: 300px;
         border: 1px solid #000000;
         padding: 10px;
+        flex-wrap: wrap;
         .info{
-            width: 350px;
+            width: 290px;
+            margin-bottom: 15px;
         }
-        #btn_remove{
+        .btn_remove{
             padding: 10px;
             font-size: 18px;
             border-radius: 4px;
@@ -24,5 +27,22 @@
     }
     .content-box:nth-child(odd){
         margin-right: 10px;
+    }
+}
+
+@media screen and (max-width: 680px){
+    .favorites{
+        .content-box{
+            width: 90%;
+            margin: auto;
+            margin-bottom: 25px;
+            .img_content{
+                max-width: 90%;
+                margin: auto;
+            }
+            .btn_remove{
+                margin-left: 10px;
+            }
+        }
     }
 }
