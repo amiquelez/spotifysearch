@@ -26,3 +26,9 @@ export const fetchArtistsFail = (error) => {
         error
     }
 };
+
+export const cleanArtists = () => {
+    return {
+        type: actionTypes.CLEAN_ARTISTS
+    }
+};

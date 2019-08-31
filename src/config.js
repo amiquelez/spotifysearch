@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import axios from 'axios';
 import createSagaMiddleware from 'redux-saga';
+import throttle from 'lodash/throttle';
 
 import favoritesReducer from './store/reducers/favorites';
 import artistReducer from './store/reducers/artist';
@@ -39,7 +40,7 @@ const persistedState = loadFromLocalStorage();
 const sagaMiddleware = createSagaMiddleware();
 
 const rootReducer = combineReducers({
-    favorites: favoritesReducer,
+    fav: favoritesReducer,
     artist: artistReducer,
     album: albumReducer,
     track: trackReducer,
@@ -58,6 +59,8 @@ sagaMiddleware.run(watchAlbum);
 sagaMiddleware.run(watchTrack);
 sagaMiddleware.run(watchSearch);
 
-store.subscribe(() => saveToLocalStorage(store.getState()));
+store.subscribe(throttle(() => { 
+    saveToLocalStorage({ fav: store.getState().fav });
+}, 1000));
 
 export default store;

@@ -16,7 +16,7 @@ export function* removeFromFavoritesSaga(action){
 
 export function* updateFavoritesSaga(){
     const state = yield select();
-    const favorites = state.favorites.favorites;
+    const favorites = state.fav.favorites;
     if(favorites && favorites.length > 0){
         const favIds = yield favorites.join(',');
         const url = yield `${constant.TRACKS}/?${constant.IDS}=${favIds}`;

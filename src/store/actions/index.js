@@ -36,5 +36,6 @@ export {
     fetchArtists,
     fetchArtistsStart,
     fetchArtistsSuccess,
-    fetchArtistsFail
+    fetchArtistsFail,
+    cleanArtists
 } from './search';

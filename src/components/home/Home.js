@@ -16,8 +16,8 @@ const Home = (props) => {
 
 const mapStateToProps = state => {
     return {
-        favorites: state.favorites.favorites,
-        tracks: state.favorites.favoritesData
+        favorites: state.fav.favorites,
+        tracks: state.fav.favoritesData
     };
 };
 

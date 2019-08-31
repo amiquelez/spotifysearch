@@ -25,14 +25,15 @@ class SearchBar extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        if(this.props.artists[0]){
-            this.props.history.push(`/artist/${this.props.artists[0].id}`);
-            this.setState({ artists: [] });
-        }
+        if(!this.props.artists[0]) return;
+        this.props.history.push(`/artist/${this.props.artists[0].id}`);
+        this.setState({ showPopup: false });
+        this.props.cleanArtists();
     }
     
     hidePopup = () => {
         this.setState({ showPopup: false });
+        this.props.cleanArtists();
     }
 
     render(){
@@ -60,7 +61,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchArtists: (value) => dispatch(action.fetchArtists(value))
+        fetchArtists: (value) => dispatch(action.fetchArtists(value)),
+        cleanArtists: () => dispatch(action.cleanArtists())
     };
 };
 

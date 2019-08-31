@@ -15,6 +15,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.FETCH_TRACK_INFO_START:
             return {
                 ...state,
+                error: false,
                 loading: true
             };
         case actionTypes.FETCH_TRACK_INFO_SUCCESS:
@@ -28,6 +29,7 @@ const reducer = (state = initialState, action) => {
                 albumName: album.name, 
                 image: album.images[0].url, 
                 trackSource: preview_url,
+                error: false,
                 loading: false
             }
         case actionTypes.FETCH_TRACK_INFO_FAIL:

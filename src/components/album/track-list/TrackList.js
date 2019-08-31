@@ -34,7 +34,7 @@ const TrackList = (props) => {
 
 const mapStateToProps = state => {
     return {
-        favorites: state.favorites.favorites
+        favorites: state.fav.favorites
     };
 }
 

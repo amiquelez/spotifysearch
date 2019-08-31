@@ -25,6 +25,11 @@ const reducer = (state = initialState, action) => {
                 error: true,
                 loading: false
             }
+        case actionTypes.CLEAN_ARTISTS:
+            return {
+                ...state,
+                artists: []
+            }
         default:
             return state;
     }
