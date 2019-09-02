@@ -1,5 +1,4 @@
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
-import axios from 'axios';
 import createSagaMiddleware from 'redux-saga';
 import throttle from 'lodash/throttle';
 
@@ -8,12 +7,8 @@ import artistReducer from './store/reducers/artist';
 import albumReducer from './store/reducers/album';
 import trackReducer from './store/reducers/track';
 import searchReducer from './store/reducers/search';
+import authReducer from './store/reducers/auth';
 import { watchFavorites, watchArtist, watchAlbum, watchTrack, watchSearch } from './store/sagas';
-import * as constant from './constants';
-
-const token = constant.TOKEN;
-axios.defaults.baseURL = constant.API_URL;
-axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
 const saveToLocalStorage = (state) => {
     try{
@@ -44,7 +39,8 @@ const rootReducer = combineReducers({
     artist: artistReducer,
     album: albumReducer,
     track: trackReducer,
-    search: searchReducer
+    search: searchReducer,
+    auth: authReducer
 });
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

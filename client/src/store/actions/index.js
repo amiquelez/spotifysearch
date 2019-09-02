@@ -39,3 +39,6 @@ export {
     fetchArtistsFail,
     cleanArtists
 } from './search';
+export {
+    authSetToken
+} from './auth';
